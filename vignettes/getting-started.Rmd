@@ -1,0 +1,192 @@
+---
+title: "Getting Started with spfcICOMP"
+author: "Kabir O. Olorede"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with spfcICOMP}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+# Introduction
+
+The `spfcICOMP` package implements Shrinkage Principal Fitted Components
+(SPFC) methodology for sufficient dimension reduction under
+high-dimensional settings.
+
+The package combines
+
+- shrinkage covariance estimation,
+- principal fitted components,
+- information-complexity model selection,
+- adaptive feature screening, and
+- downstream predictive modelling
+
+within a unified framework.
+
+# Load package
+
+```{r}
+library(spfcICOMP)
+```
+
+# Simulate data
+
+```{r}
+set.seed(123)
+
+sim <- simulate_spfc_continuous(
+  n = 100,
+  p = 50,
+  d = 1,
+  s = 5,
+  rho_x = 0.5,
+  snr = 2
+)
+
+X <- sim$X
+y <- sim$y
+```
+
+# Fit SPFC
+
+```{r}
+fit <- spfc_fit(
+  X = X,
+  y = y,
+  d = 1,
+  ytype = "continuous",
+  cov_method = "mec",
+  nslices = 5,
+  poly_degree = 2
+)
+
+fit
+summary(fit)
+```
+
+# Extract estimated directions
+
+```{r}
+coef(fit)
+```
+
+# Obtain reduced scores
+
+```{r}
+scores <- fitted(fit)
+
+head(scores)
+```
+
+# Predict new observations
+
+```{r}
+predict(
+  fit,
+  newdata = X[1:5, ]
+)
+```
+
+# Structural dimension selection
+
+```{r}
+dsel <- spfc_select_dimension(
+  X = X,
+  y = y,
+  d_grid = 1:3,
+  cov_method = "mec",
+  ytype = "continuous"
+)
+
+dsel$criteria
+dsel$selected
+```
+
+# Feature screening
+
+The default C1F-calibrated feature-screening rule uses the covariance of the fitted downstream reduced model. The reduced-space model is therefore fitted before C1F-based screening is applied.
+
+```{r}
+reduced_model <- fit_reduced_model(
+  Z = scores,
+  y = y,
+  ytype = "continuous"
+)
+
+vsel <- spfc_select_variables(
+  fit = fit,
+  method = "adaptive_weighted_l1",
+  selection_rule = "c1f",
+  reduced_model = reduced_model
+)
+
+head(vsel)
+```
+
+# Benchmark covariance estimators
+
+```{r}
+bench <- benchmark_spfc(
+  X = X,
+  y = y,
+  d = 1,
+  methods = c(
+    "mec",
+    "oas",
+    "sre",
+    "sde",
+    "cse"
+  ),
+  verbose = FALSE
+)
+
+bench
+summary(bench)
+```
+
+# Simulation study
+
+```{r}
+results <- run_spfc_simulation(
+  response_type = "continuous",
+  nrep = 5,
+  n = 100,
+  p = 50,
+  d = 1,
+  s = 5,
+  rho_x = 0.5,
+  snr = 2,
+  cov_methods = c(
+    "mec",
+    "oas"
+  )
+)
+
+summary_results <-
+  summarise_spfc_simulation(
+    results
+  )
+
+summary_results
+```
+
+# Plotting
+
+```{r}
+plot_rmse_by_covariance(results)
+
+plot_runtime_by_covariance(results)
+
+plot_subspace_distance_by_covariance(results)
+```
+
+# References
+
+Cook, R. D. and Forzani, L. (2008). Principal Fitted Components for dimension reduction in regression. *Statistical Science*, 23(4), 485--501. doi:10.1214/08-STS275.
+
+Chen, Y., Wiesel, A., Eldar, Y. C. and Hero, A. O. (2010). Shrinkage algorithms for MMSE covariance estimation. *IEEE Transactions on Signal Processing*, 58(10), 5016--5029. doi:10.1109/TSP.2010.2053029.
+
+Bozdogan, H. (2000). Akaike's Information Criterion and recent developments in information complexity. *Journal of Mathematical Psychology*, 44(1), 62--91. doi:10.1006/jmps.1999.1277.
+
+Olorede, K. O. and Yahya, W. B. (2019). A new covariance estimator for sufficient dimension reduction in high-dimensional and undersized sample problems. *arXiv*. doi:10.48550/arXiv.1909.13017.
