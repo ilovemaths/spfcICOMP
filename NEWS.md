@@ -6,6 +6,9 @@
 - Replaced over-strong public wording about sparsity/selection with feature-screening terminology where appropriate.
 - Removed third-party Riboflavin and Golub benchmark copies from the distributable package; the GitHub thesis-analysis layer now obtains Riboflavin from the archived CRAN `hdi` 0.1-10 source (with an installed-`hdi` fast path when available) and Golub from Bioconductor `multtest` when empirical reproduction is requested.
 - Passed a local CRAN-style check with 0 errors, 0 warnings, and 0 notes and established a five-platform GitHub Actions R CMD check workflow.
+- Hardened validation stratification so numeric binary responses are treated as categorical strata in train-test splitting and cross-validation fold construction.
+- Added regression tests for numeric binary-response stratification without changing the statistical methodology or thesis-result implementation.
+- Verified 149/149 local tests, a local R CMD check with 0 errors, 0 warnings, and 0 notes, exact R 3.5.0 compatibility, and the five-platform GitHub Actions matrix at commit fc80e696b7a64a2b8ab7c274f0af6c13e0fbb8ff.
 
 # spfcICOMP 0.0.0.9008
 

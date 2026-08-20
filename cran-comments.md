@@ -6,9 +6,12 @@ This is the pre-submission record for the first `spfcICOMP` CRAN release. It wil
 
 For development version 0.0.0.9009:
 
-* 145 tests pass.
+* 149 tests pass.
 * Local Windows CRAN-style check: 0 errors | 0 warnings | 0 notes.
 * GitHub Actions R CMD check succeeds on macOS release, Windows release, Ubuntu release, Ubuntu R-devel, and Ubuntu oldrel-1.
+* Exact R 3.5.0 compatibility audit passes.
+* Validation stratification hardening is verified at commit `fc80e696b7a64a2b8ab7c274f0af6c13e0fbb8ff`.
+* Both public-repository commits passed all five GitHub Actions matrix jobs.
 
 The exact v0.1.0 source tarball will be rebuilt and rechecked before submission.
 

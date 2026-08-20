@@ -8,13 +8,16 @@
 - Default branch: `main`.
 - GitHub Actions: standard five-platform R CMD check workflow configured.
 
-## Verified checks completed through 14 August 2026
+## Verified checks completed through 20 August 2026
 
 The current v0.0.0.9009 development state has:
 
-- 145 package tests passing;
+- 149 package tests passing;
 - local `devtools::check(cran = TRUE, manual = TRUE)` with **0 errors, 0 warnings, 0 notes**;
 - successful GitHub Actions checks on macOS release, Windows release, Ubuntu release, Ubuntu R-devel, and Ubuntu oldrel-1.
+- exact R 3.5.0 compatibility audit passed;
+- numeric binary-response stratification hardened and verified at commit `fc80e696b7a64a2b8ab7c274f0af6c13e0fbb8ff`;
+- both the initial public snapshot and the subsequent hardening commit passed all five GitHub Actions matrix jobs.
 
 These checks are development-hardening evidence. The exact future v0.1.0 source tarball must still be rebuilt and checked again immediately before CRAN submission.
 
@@ -33,7 +36,7 @@ Neither external data package is required for package installation, examples, vi
 
 ### 1. Public API review
 
-Classify the current exports into stable user-facing API, advanced user API, and internal implementation helpers. Reduce unnecessary exports only where this does not break the tested public workflow. Any API reduction must be followed by full tests and multi-platform checks.
+The current exports were reviewed as stable user-facing, advanced research, and plotting interfaces. No export was identified as clearly accidental. The existing API is therefore retained for the initial 0.1.0 release to avoid unnecessary late-stage code and documentation churn.
 
 ### 2. Examples and documentation
 
