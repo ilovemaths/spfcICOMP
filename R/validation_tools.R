@@ -1,9 +1,32 @@
+#' Determine Whether a Response Should Be Stratified
+#'
+#' @param y Response vector.
+#'
+#' @return Logical scalar.
+#'
+#' @noRd
+is_stratifiable_response <- function(y){
+
+  if(is.factor(y) || is.character(y) || is.logical(y)){
+    return(TRUE)
+  }
+
+  if(is.numeric(y)){
+
+    observed <- y[!is.na(y)]
+
+    return(length(unique(observed)) == 2L)
+  }
+
+  FALSE
+}
+
 #' Create Train-test Split
 #'
 #' @param y Response vector.
 #' @param test_fraction Proportion assigned to test set.
 #' @param seed Random seed.
-#' @param stratify Logical. If TRUE, stratify categorical responses.
+#' @param stratify Logical. If TRUE, stratify factor, character, logical, or numeric two-class responses.
 #'
 #' @return A list with train and test indices.
 #'
@@ -28,7 +51,7 @@ create_train_test_split <- function(
 
   n <- length(y)
 
-  if(isTRUE(stratify) && (is.factor(y) || is.character(y))){
+  if(isTRUE(stratify) && is_stratifiable_response(y)){
 
     y_fac <- as.factor(y)
 
@@ -78,7 +101,7 @@ create_train_test_split <- function(
 #' @param y Response vector.
 #' @param folds Number of folds.
 #' @param seed Random seed.
-#' @param stratify Logical. If TRUE, stratify categorical responses.
+#' @param stratify Logical. If TRUE, stratify factor, character, logical, or numeric two-class responses.
 #'
 #' @return Integer vector of fold labels.
 #'
@@ -107,7 +130,7 @@ create_cv_folds <- function(
 
   fold_id <- integer(n)
 
-  if(isTRUE(stratify) && (is.factor(y) || is.character(y))){
+  if(isTRUE(stratify) && is_stratifiable_response(y)){
 
     y_fac <- as.factor(y)
 

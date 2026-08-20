@@ -13,7 +13,7 @@ create_train_test_split(y, test_fraction = 0.3, seed = 123, stratify = TRUE)
 
 \item{seed}{Random seed.}
 
-\item{stratify}{Logical. If TRUE, stratify categorical responses.}
+\item{stratify}{Logical. If TRUE, stratify factor, character, logical, or numeric two-class responses.}
 }
 \value{
 A list with train and test indices.

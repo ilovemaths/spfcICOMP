@@ -13,7 +13,7 @@ create_cv_folds(y, folds = 5, seed = 123, stratify = TRUE)
 
 \item{seed}{Random seed.}
 
-\item{stratify}{Logical. If TRUE, stratify categorical responses.}
+\item{stratify}{Logical. If TRUE, stratify factor, character, logical, or numeric two-class responses.}
 }
 \value{
 Integer vector of fold labels.
