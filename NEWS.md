@@ -1,4 +1,4 @@
-# spfcICOMP 0.0.0.9009
+# spfcICOMP 0.1.0
 
 - Began GitHub and CRAN release hardening without changing the statistical methodology or thesis-result implementation.
 - Added repository metadata, README, citation metadata, and CRAN-preparation notes.
@@ -11,6 +11,7 @@
 - Verified 149/149 local tests, a local R CMD check with 0 errors, 0 warnings, and 0 notes, exact R 3.5.0 compatibility, and the five-platform GitHub Actions matrix at commit fc80e696b7a64a2b8ab7c274f0af6c13e0fbb8ff.
 - Made citation metadata safe to evaluate before package installation by removing the runtime package-description lookup.
 - Declared British English and added a reviewed spelling wordlist for technical terms, acronyms, proper names, and method identifiers.
+- Built and verified the exact 0.1.0 source tarball with 149/149 test expectations passing, no spelling flags, no missing or forbidden source-package entries, and a Windows R 4.6.0 R CMD check result of 0 errors, 0 warnings, and 0 notes.
 
 # spfcICOMP 0.0.0.9008
 

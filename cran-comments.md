@@ -1,19 +1,20 @@
 ## Initial CRAN submission
 
-This is the pre-submission record for the first `spfcICOMP` CRAN release. It will be updated with the exact v0.1.0 release-candidate results immediately before submission.
+This is the pre-submission record for the first `spfcICOMP` CRAN release.
 
-## Current development checks
+## Exact release-candidate checks
 
-For development version 0.0.0.9009:
+For release candidate version 0.1.0:
 
-* 149 tests pass.
-* Local Windows CRAN-style check: 0 errors | 0 warnings | 0 notes.
-* GitHub Actions R CMD check succeeds on macOS release, Windows release, Ubuntu release, Ubuntu R-devel, and Ubuntu oldrel-1.
-* Exact R 3.5.0 compatibility audit passes.
-* Validation stratification hardening is verified at commit `fc80e696b7a64a2b8ab7c274f0af6c13e0fbb8ff`.
-* Both public-repository commits passed all five GitHub Actions matrix jobs.
+* 149 of 149 test expectations pass, with no failures, skips, warnings, or errors.
+* The exact source tarball is `spfcICOMP_0.1.0.tar.gz`, containing 97 entries and measuring 77,678 bytes.
+* Local Windows R 4.6.0 `R CMD check --as-cran --no-manual`: 0 errors | 0 warnings | 0 notes.
+* The authoritative `00check.log` ends with `Status: OK`.
+* All required source-package files are present and no forbidden repository, thesis-analysis, generated-output, reverse-dependency, or local-build artefacts are included.
+* Standalone citation evaluation passes and the British-English spelling audit reports no flags.
+* Exact R 3.5.0 compatibility was verified during development hardening.
 
-The exact v0.1.0 source tarball will be rebuilt and rechecked before submission.
+The earlier public development commits passed the five-platform GitHub Actions matrix on macOS release, Windows release, Ubuntu release, Ubuntu R-devel, and Ubuntu oldrel-1. The exact 0.1.0 release commit and its five-platform matrix result will be recorded here before CRAN submission.
 
 ## External benchmark data
 

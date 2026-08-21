@@ -4,22 +4,31 @@
 
 - Source baseline: 0.0.0.9008.
 - CRAN/GitHub hardening version: 0.0.0.9009.
+- Initial CRAN release candidate: 0.1.0.
 - Statistical methodology and frozen thesis-result implementation: unchanged.
 - Default branch: `main`.
 - GitHub Actions: standard five-platform R CMD check workflow configured.
 
-## Verified checks completed through 20 August 2026
+## Verified checks completed through 21 August 2026
 
-The current v0.0.0.9009 development state has:
+The v0.0.0.9009 development-hardening state has:
 
 - 149 package tests passing;
 - local `devtools::check(cran = TRUE, manual = TRUE)` with **0 errors, 0 warnings, 0 notes**;
-- successful GitHub Actions checks on macOS release, Windows release, Ubuntu release, Ubuntu R-devel, and Ubuntu oldrel-1.
+- successful GitHub Actions checks on macOS release, Windows release, Ubuntu release, Ubuntu R-devel, and Ubuntu oldrel-1;
 - exact R 3.5.0 compatibility audit passed;
 - numeric binary-response stratification hardened and verified at commit `fc80e696b7a64a2b8ab7c274f0af6c13e0fbb8ff`;
-- both the initial public snapshot and the subsequent hardening commit passed all five GitHub Actions matrix jobs.
+- both public development commits passed all five GitHub Actions matrix jobs.
 
-These checks are development-hardening evidence. The exact future v0.1.0 source tarball must still be rebuilt and checked again immediately before CRAN submission.
+The exact v0.1.0 local release candidate has:
+
+- 149 of 149 test expectations passing, with no failures, skips, warnings, or errors;
+- a source tarball named `spfcICOMP_0.1.0.tar.gz`, containing 97 entries and measuring 77,678 bytes;
+- all required package files present and no forbidden repository, thesis-analysis, generated-output, reverse-dependency, or local-build artefacts;
+- a Windows R 4.6.0 `R CMD check --as-cran --no-manual` result of **0 errors, 0 warnings, 0 notes**, with authoritative `Status: OK`;
+- standalone citation evaluation passing and no spelling flags under the declared British-English language metadata.
+
+The remaining release gate is to commit and push the exact release-candidate metadata, then obtain a successful five-platform GitHub Actions matrix for that release commit.
 
 ## Resolved: benchmark-data redistribution separation
 
@@ -40,14 +49,14 @@ The current exports were reviewed as stable user-facing, advanced research, and 
 
 ### 2. Examples and documentation
 
-Add concise, fast executable examples to the principal user-facing functions. Examples must not run heavy Monte Carlo simulations, require optional benchmark data, or write outside temporary directories.
+The principal user-facing functions contain concise, fast examples that do not require optional benchmark data or write outside temporary directories. The examples, donttest examples, tests, and vignette rebuild completed successfully in the pre-bump source-tarball check.
 
 ### 3. Dependency, URL, spelling, and portability checks
 
-Before release, run `urlchecker::url_check()`, run a package spelling check, review declared imports/suggests, confirm source-package and installed-package sizes, inspect licence and citation metadata, and verify no generated research output enters the source tarball.
+The dependency declaration was reviewed and the only strong dependencies are R and MASS. Manual extended-timeout checks returned HTTP 200 for the repository and issue-tracker URLs. British English is declared and the reviewed spelling audit returns no flags. The pre-bump source tarball contained 96 entries, was 77,511 bytes, contained all required package files, and contained no excluded thesis, output, GitHub, reverse-dependency, or local-build artefacts. Licence and standalone citation metadata were also verified.
 
 ### 4. Exact release-candidate checks
 
-Only after the audit is complete: bump 0.0.0.9009 to 0.1.0; build the exact source tarball; check that exact tarball with `R CMD check --as-cran`; rerun the GitHub Actions matrix on the release commit; update `cran-comments.md`; and submit the exact checked source tarball.
+The exact local 0.1.0 source tarball has passed the full release-candidate test, content, citation, spelling, and `R CMD check --as-cran` gates. The release-candidate metadata must now be committed and pushed without further methodological changes. The five-platform GitHub Actions matrix must pass at that exact release commit, after which the commit SHA and final CI result must be recorded in `cran-comments.md` before CRAN submission.
 
 After CRAN acceptance, tag the accepted commit `v0.1.0`, create a GitHub release, and advance the development version.

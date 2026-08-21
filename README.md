@@ -20,11 +20,12 @@ The package currently provides:
 - reduced-space regression and classification;
 - simulation and benchmarking utilities.
 
-## Development status
+## Release status
 
-The current development series is being hardened for an initial CRAN release.
-The CRAN release candidate will be versioned separately after the package
-passes the full pre-submission checks on multiple R platforms.
+Version 0.1.0 is the initial CRAN release candidate. The exact source
+tarball has passed the local test suite and CRAN-style check. The release
+commit remains subject to the five-platform GitHub Actions matrix before
+submission.
 
 ## Installation from GitHub
 
