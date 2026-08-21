@@ -9,6 +9,8 @@
 - Hardened validation stratification so numeric binary responses are treated as categorical strata in train-test splitting and cross-validation fold construction.
 - Added regression tests for numeric binary-response stratification without changing the statistical methodology or thesis-result implementation.
 - Verified 149/149 local tests, a local R CMD check with 0 errors, 0 warnings, and 0 notes, exact R 3.5.0 compatibility, and the five-platform GitHub Actions matrix at commit fc80e696b7a64a2b8ab7c274f0af6c13e0fbb8ff.
+- Made citation metadata safe to evaluate before package installation by removing the runtime package-description lookup.
+- Declared British English and added a reviewed spelling wordlist for technical terms, acronyms, proper names, and method identifiers.
 
 # spfcICOMP 0.0.0.9008
 

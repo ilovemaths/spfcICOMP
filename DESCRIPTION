@@ -19,6 +19,7 @@ License: MIT + file LICENSE
 URL: https://github.com/ilovemaths/spfcICOMP
 BugReports: https://github.com/ilovemaths/spfcICOMP/issues
 Encoding: UTF-8
+Language: en-GB
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Imports:

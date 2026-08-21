@@ -1,14 +1,11 @@
-meta <- packageDescription("spfcICOMP")
-
-auto <- personList(
-  as.person("Kabir Opeyemi Olorede")
-)
-
-bibentry(
+utils::bibentry(
   bibtype = "Manual",
   title = "spfcICOMP: Shrinkage Principal Fitted Components with Information Complexity-Based Model Selection",
-  author = auto,
+  author = utils::person(
+    given = "Kabir Opeyemi",
+    family = "Olorede"
+  ),
   year = "2026",
-  note = paste("R package version", meta$Version),
+  note = "R package",
   url = "https://github.com/ilovemaths/spfcICOMP"
 )
