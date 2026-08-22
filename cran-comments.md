@@ -14,7 +14,7 @@ For release candidate version 0.1.0:
 * Standalone citation evaluation passes and the British-English spelling audit reports no flags.
 * Exact R 3.5.0 compatibility was verified during development hardening.
 
-The earlier public development commits passed the five-platform GitHub Actions matrix on macOS release, Windows release, Ubuntu release, Ubuntu R-devel, and Ubuntu oldrel-1. The exact 0.1.0 release commit and its five-platform matrix result will be recorded here before CRAN submission.
+The earlier public development commits and the exact 0.1.0 release-candidate commit `e48f48e26f3e607690a9809129b21ec7665bd7d1` passed the configured five-platform GitHub Actions matrix on macOS release, Windows release, Ubuntu release, Ubuntu R-devel, and Ubuntu oldrel-1. The release-candidate workflow run completed successfully on 21 August 2026. The checked source-package content has not changed since local tarball verification.
 
 ## External benchmark data
 

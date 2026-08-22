@@ -28,7 +28,7 @@ The exact v0.1.0 local release candidate has:
 - a Windows R 4.6.0 `R CMD check --as-cran --no-manual` result of **0 errors, 0 warnings, 0 notes**, with authoritative `Status: OK`;
 - standalone citation evaluation passing and no spelling flags under the declared British-English language metadata.
 
-The remaining release gate is to commit and push the exact release-candidate metadata, then obtain a successful five-platform GitHub Actions matrix for that release commit.
+The exact 0.1.0 release-candidate commit `e48f48e26f3e607690a9809129b21ec7665bd7d1` was pushed to `main` and passed the configured five-platform GitHub Actions matrix on 21 August 2026. All local and remote release-candidate verification gates are complete.
 
 ## Resolved: benchmark-data redistribution separation
 
@@ -57,6 +57,6 @@ The dependency declaration was reviewed and the only strong dependencies are R a
 
 ### 4. Exact release-candidate checks
 
-The exact local 0.1.0 source tarball has passed the full release-candidate test, content, citation, spelling, and `R CMD check --as-cran` gates. The release-candidate metadata must now be committed and pushed without further methodological changes. The five-platform GitHub Actions matrix must pass at that exact release commit, after which the commit SHA and final CI result must be recorded in `cran-comments.md` before CRAN submission.
+The exact local 0.1.0 source tarball passed the full release-candidate test, content, citation, spelling, and `R CMD check --as-cran` gates. Commit `e48f48e26f3e607690a9809129b21ec7665bd7d1` also passed the configured five-platform GitHub Actions matrix. The checked package content has not changed since these verifications. No release tag has been created and CRAN submission has not started.
 
 After CRAN acceptance, tag the accepted commit `v0.1.0`, create a GitHub release, and advance the development version.
