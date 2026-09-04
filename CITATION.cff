@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use spfcICOMP, please cite the software using the metadata below."
+title: "spfcICOMP: Shrinkage Principal Fitted Components with Information Complexity-Based Model Selection"
+type: software
+authors:
+  - family-names: Olorede
+    given-names: Kabir Opeyemi
+version: 0.1.0
+date-released: 2026-09-03
+doi: 10.5281/zenodo.22310095
+repository-code: "https://github.com/ilovemaths/spfcICOMP"
+url: "https://CRAN.R-project.org/package=spfcICOMP"
+license: MIT

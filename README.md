@@ -2,6 +2,8 @@
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/ilovemaths/spfcICOMP/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ilovemaths/spfcICOMP/actions/workflows/R-CMD-check.yaml)
+[![CRAN status](https://www.r-pkg.org/badges/version/spfcICOMP)](https://CRAN.R-project.org/package=spfcICOMP)
+[![DOI](https://zenodo.org/badge/1335997201.svg)](https://doi.org/10.5281/zenodo.22310094)
 <!-- badges: end -->
 
 `spfcICOMP` implements Shrinkage Principal Fitted Components (SPFC) for
@@ -22,14 +24,29 @@ The package currently provides:
 
 ## Release status
 
-Version 0.1.0 is the initial CRAN release candidate. The exact source
-tarball has passed the local test suite and CRAN-style check. The release
-commit remains subject to the five-platform GitHub Actions matrix before
-submission.
+Version 0.1.0 is published on CRAN and archived on Zenodo. The release
+passed 149 test expectations, the five-platform GitHub Actions matrix,
+the declared R 3.5.0 compatibility audit, and CRAN incoming pretests
+with no errors or warnings.
 
-## Installation from GitHub
+- CRAN: https://CRAN.R-project.org/package=spfcICOMP
+- GitHub release: https://github.com/ilovemaths/spfcICOMP/releases/tag/v0.1.0
+- Version-specific Zenodo DOI: https://doi.org/10.5281/zenodo.22310095
+- Concept DOI for all versions: https://doi.org/10.5281/zenodo.22310094
 
-The development version can be installed from GitHub with either `pak` or `remotes`:
+## Installation
+
+Install the released version from CRAN:
+
+```r
+install.packages("spfcICOMP")
+library(spfcICOMP)
+```
+
+## Development version
+
+The development version can be installed from GitHub with either `pak` or
+`remotes`:
 
 ```r
 pak::pak("ilovemaths/spfcICOMP")
@@ -89,6 +106,18 @@ These optional research-data packages are not required for the normal
 installation, tests, vignettes, or examples of `spfcICOMP`. See
 `thesis_analysis/README.md` for the frozen empirical-analysis settings and run
 order.
+
+## Citation
+
+To obtain the package citation in R, run:
+
+```r
+citation("spfcICOMP")
+```
+
+For the exact 0.1.0 software archive, use
+https://doi.org/10.5281/zenodo.22310095. The stable concept DOI for the
+software project is https://doi.org/10.5281/zenodo.22310094.
 
 ## Methodological references
 

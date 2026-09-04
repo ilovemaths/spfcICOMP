@@ -1,6 +1,6 @@
 Package: spfcICOMP
 Title: Shrinkage Principal Fitted Components with Information Complexity-Based Model Selection
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R:
     person("Kabir Opeyemi", "Olorede", email = "kabir.olorede@kwasu.edu.ng",
            role = c("aut", "cre", "cph"))
@@ -16,7 +16,9 @@ Description: Implements shrinkage principal fitted components for sufficient
     <doi:10.1006/jmps.1999.1277>, and Olorede and Yahya (2019)
     <doi:10.48550/arXiv.1909.13017>.
 License: MIT + file LICENSE
-URL: https://github.com/ilovemaths/spfcICOMP
+URL: https://github.com/ilovemaths/spfcICOMP,
+    https://CRAN.R-project.org/package=spfcICOMP,
+    https://doi.org/10.5281/zenodo.22310094
 BugReports: https://github.com/ilovemaths/spfcICOMP/issues
 Encoding: UTF-8
 Language: en-GB

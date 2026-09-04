@@ -1,3 +1,10 @@
+# spfcICOMP 0.1.0.9000
+
+- Opened the post-release development cycle after publication of version 0.1.0 on CRAN.
+- Added CRAN and Zenodo badges and made CRAN installation the primary README route.
+- Recorded the version-specific Zenodo DOI (10.5281/zenodo.22310095) and stable concept DOI (10.5281/zenodo.22310094).
+- Added machine-readable citation metadata for the archived 0.1.0 software release.
+
 # spfcICOMP 0.1.0
 
 - Began GitHub and CRAN release hardening without changing the statistical methodology or thesis-result implementation.

@@ -6,6 +6,7 @@ utils::bibentry(
     family = "Olorede"
   ),
   year = "2026",
-  note = "R package",
-  url = "https://github.com/ilovemaths/spfcICOMP"
+  note = "R package version 0.1.0",
+  doi = "10.5281/zenodo.22310095",
+  url = "https://CRAN.R-project.org/package=spfcICOMP"
 )
