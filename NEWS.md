@@ -1,5 +1,9 @@
 # spfcICOMP 0.1.0.9000
 
+- Made benchmark printing response- and validation-aware, so structurally inapplicable metrics are no longer displayed as missing values.
+- Separated applicable covariance diagnostics from the main performance table while retaining the complete internal benchmark schema for backwards compatibility.
+- Added regression tests for compact continuous, categorical, and cross-validation benchmark summaries.
+- Retained `CITATION.cff` for GitHub and Zenodo while excluding it from R source-package builds to prevent non-standard-file check notes.
 - Opened the post-release development cycle after publication of version 0.1.0 on CRAN.
 - Added CRAN and Zenodo badges and made CRAN installation the primary README route.
 - Recorded the version-specific Zenodo DOI (10.5281/zenodo.22310095) and stable concept DOI (10.5281/zenodo.22310094).

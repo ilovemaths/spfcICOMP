@@ -314,6 +314,127 @@ benchmark_spfc <- function(
 }
 
 
+# Build a compact benchmark table containing only fields that apply to the
+# response type and validation strategy. The complete rectangular schema
+# remains available in `x$summary` for backwards compatibility.
+#
+# @param object Object returned by `benchmark_spfc()`.
+# @return A data frame without structurally inapplicable columns.
+# @noRd
+benchmark_display_table <- function(object){
+
+  tab <- object$summary
+
+  metric_columns <- if(object$ytype == "continuous"){
+    if(object$validation == "cv"){
+      c("mean_rmse", "sd_rmse", "mean_mae", "sd_mae")
+    } else {
+      c("rmse", "mae")
+    }
+  } else {
+    if(object$validation == "cv"){
+      c(
+        "mean_accuracy",
+        "mean_sensitivity",
+        "mean_specificity",
+        "mean_precision",
+        "mean_f1",
+        "mean_balanced_accuracy"
+      )
+    } else {
+      c(
+        "accuracy",
+        "sensitivity",
+        "specificity",
+        "precision",
+        "f1",
+        "balanced_accuracy"
+      )
+    }
+  }
+
+  display_columns <- c(
+    "cov_method",
+    "d",
+    "reduced_model",
+    "runtime_sec",
+    metric_columns,
+    "n_selected"
+  )
+
+  display_columns <- intersect(
+    display_columns,
+    names(tab)
+  )
+
+  tab[
+    ,
+    display_columns,
+    drop = FALSE
+  ]
+}
+
+
+# Collect method-specific covariance diagnostics in long form. Rows are
+# created only where a diagnostic is defined, avoiding misleading missing
+# values for estimators that do not use that quantity.
+#
+# @param object Object returned by `benchmark_spfc()`.
+# @return A data frame with covariance method, diagnostic and value.
+# @noRd
+benchmark_covariance_details <- function(object){
+
+  tab <- object$summary
+  rows <- list()
+  row_index <- 0L
+
+  if("rho" %in% names(tab)){
+    keep_rho <- is.finite(tab$rho)
+
+    if(any(keep_rho)){
+      row_index <- row_index + 1L
+      rows[[row_index]] <- data.frame(
+        cov_method = tab$cov_method[keep_rho],
+        diagnostic = "rho",
+        value = tab$rho[keep_rho],
+        stringsAsFactors = FALSE
+      )
+    }
+  }
+
+  if("nslices_used" %in% names(tab)){
+    keep_slices <- !is.na(tab$nslices_used)
+
+    if(any(keep_slices)){
+      row_index <- row_index + 1L
+      rows[[row_index]] <- data.frame(
+        cov_method = tab$cov_method[keep_slices],
+        diagnostic = "nslices_used",
+        value = as.numeric(tab$nslices_used[keep_slices]),
+        stringsAsFactors = FALSE
+      )
+    }
+  }
+
+  if(length(rows) == 0L){
+    return(data.frame(
+      cov_method = character(),
+      diagnostic = character(),
+      value = numeric(),
+      stringsAsFactors = FALSE
+    ))
+  }
+
+  details <- do.call(
+    rbind,
+    rows
+  )
+
+  rownames(details) <- NULL
+  details
+}
+
+
 #' Print SPFC Benchmark
 #'
 #' @param x Object returned by `benchmark_spfc()`.
@@ -333,8 +454,15 @@ print.spfc_benchmark <- function(x, ...){
   cat("Validation:          ", x$validation, "\n", sep = "")
   cat("Methods compared:    ", paste(x$methods, collapse = ", "), "\n", sep = "")
 
-  cat("\nSummary:\n")
-  print(x$summary)
+  cat("\nPerformance summary:\n")
+  print(benchmark_display_table(x))
+
+  covariance_details <- benchmark_covariance_details(x)
+
+  if(nrow(covariance_details) > 0L){
+    cat("\nApplicable covariance diagnostics:\n")
+    print(covariance_details)
+  }
 
   invisible(x)
 }
@@ -413,7 +541,9 @@ summary.spfc_benchmark <- function(
     smaller_is_better = smaller_is_better,
     best_method = tab$cov_method[best_idx],
     best_row = tab[best_idx, , drop = FALSE],
-    table = tab
+    table = tab,
+    display_table = benchmark_display_table(object),
+    covariance_details = benchmark_covariance_details(object)
   )
 
   class(out) <- c(
@@ -446,7 +576,12 @@ print.summary.spfc_benchmark <- function(x, ...){
   cat("Best method:         ", x$best_method, "\n", sep = "")
 
   cat("\nBenchmark table:\n")
-  print(x$table)
+  print(x$display_table)
+
+  if(nrow(x$covariance_details) > 0L){
+    cat("\nApplicable covariance diagnostics:\n")
+    print(x$covariance_details)
+  }
 
   invisible(x)
 }

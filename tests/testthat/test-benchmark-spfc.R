@@ -74,6 +74,27 @@ test_that("benchmark_spfc works for continuous response", {
   expect_true(
     bench_summary$best_method %in% c("mec", "oas")
   )
+
+  expect_equal(
+    names(bench_summary$display_table),
+    c(
+      "cov_method",
+      "d",
+      "reduced_model",
+      "runtime_sec",
+      "rmse",
+      "mae",
+      "n_selected"
+    )
+  )
+
+  expect_false(
+    anyNA(bench_summary$display_table)
+  )
+
+  expect_false(
+    anyNA(bench_summary$covariance_details)
+  )
 })
 
 
@@ -149,6 +170,77 @@ test_that("benchmark_spfc works for categorical response", {
   expect_true(
     bench_summary$best_method %in% c("mec", "oas")
   )
+
+  expect_equal(
+    names(bench_summary$display_table),
+    c(
+      "cov_method",
+      "d",
+      "reduced_model",
+      "runtime_sec",
+      "accuracy",
+      "sensitivity",
+      "specificity",
+      "precision",
+      "f1",
+      "balanced_accuracy",
+      "n_selected"
+    )
+  )
+
+  expect_false(
+    anyNA(bench_summary$covariance_details)
+  )
+})
+
+
+test_that("benchmark display selects cross-validation metrics", {
+
+  object <- structure(
+    list(
+      ytype = "continuous",
+      validation = "cv",
+      summary = data.frame(
+        cov_method = c("mec", "sde"),
+        d = c(1, 1),
+        rho = c(0.4, NA_real_),
+        nslices_used = c(5L, NA_integer_),
+        reduced_model = c("lm", "lm"),
+        runtime_sec = c(0.1, 0.2),
+        rmse = c(NA_real_, NA_real_),
+        mae = c(NA_real_, NA_real_),
+        mean_rmse = c(0.5, 0.6),
+        sd_rmse = c(0.05, 0.06),
+        mean_mae = c(0.4, 0.5),
+        sd_mae = c(0.04, 0.05),
+        accuracy = c(NA_real_, NA_real_),
+        n_selected = c(4L, 5L)
+      )
+    ),
+    class = c("spfc_benchmark", "list")
+  )
+
+  display <- benchmark_display_table(object)
+  details <- benchmark_covariance_details(object)
+
+  expect_equal(
+    names(display),
+    c(
+      "cov_method",
+      "d",
+      "reduced_model",
+      "runtime_sec",
+      "mean_rmse",
+      "sd_rmse",
+      "mean_mae",
+      "sd_mae",
+      "n_selected"
+    )
+  )
+
+  expect_false(anyNA(display))
+  expect_false(anyNA(details))
+  expect_equal(nrow(details), 2L)
 })
 
 
